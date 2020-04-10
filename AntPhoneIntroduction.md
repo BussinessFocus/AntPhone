@@ -1,9 +1,9 @@
 [comment]:author:lxy  
 [comment]:date:2020/04/09
 
-##AntPhone使用介绍
+## AntPhone使用介绍
 
-###目录结构
+### 目录结构
 ```
 build ---- 存放打包后的程序文件
 config ---- create-react-app 脚手架弹出的webpack的配置文件，目前没有对其做任何修改
@@ -48,5 +48,5 @@ README.md ---- 项目说明文档
 yarn.lock ---- yarn安装包的依赖树锁定文件
 ```
 
-###使用的主要技术框架介绍
+### 使用的主要技术框架介绍
 react + antd-mobile
