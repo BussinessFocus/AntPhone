@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, WhiteSpace, WingBlank } from 'antd-mobile';
-// import WxImageViewer from 'react-wx-static-viewer';
+// import WxImageViewer from 'react-wx-assets-viewer';
 import { PhotoProvider, PhotoConsumer, PhotoSlider } from 'react-photo-view';
 import 'react-photo-view/dist/index.css';
 
