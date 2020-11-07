@@ -4,7 +4,7 @@
  * @Description: 渲染表情包的组件  用法：<RenderEmotion content={this.state.content}/>
  */
 import React, { Component } from 'react';
-import "../styles/emotion.scss"
+import "./emotion.scss"
 class RenderEmotion extends Component {
     constructor(props) {
         super(props);

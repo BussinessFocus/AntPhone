@@ -4,7 +4,7 @@
  * @Description: 自定义表情包组件  用法：<Emotion emotion={this.handleEmotion.bind(this)} height={400}/>
  */
 import React, { Component } from 'react';
-import "../styles/emotion.scss"
+import "./emotion.scss"
 class Emotion extends Component {
     constructor(props) {
         super(props);
