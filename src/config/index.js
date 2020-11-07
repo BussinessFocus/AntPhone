@@ -1,29 +1,22 @@
 
-import axios from 'axios'
-import qs from 'qs'
-import url from './url'
-
-axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-
-// 封装get请求
-const getRequest = (url, data) => axios.get(url, { params: data }).catch(res => res)
-
-// 封装post请求
-const postRequest = (url, data) => axios.post(url, data).catch(res => res)
-
-// 请求拦截器
-axios.interceptors.request.use(config => {
-    if (Object.prototype.toString.call(config.data) !== '[object FormData]') {
-        config.data = qs.stringify(config.data);
-    }
-    return config
-})
-
-// 响应拦截器
-axios.interceptors.response.use(response => response.data)
-
-export default {
-    ...url,
-    getRequest,
-    postRequest
+// console.log("当前环境是:", process.env.NODE_ENV)
+let LXF_baseUrl = 'http://192.168.2.93:7001/'
+let SXG_baseUrl = 'http://192.168.2.78:7001/'
+LXF_baseUrl = SXG_baseUrl = 'http://39.104.135.186:8001/'
+// LXF_baseUrl = SXG_baseUrl = 'http://www.sino-med.net:7001/'
+// 测试环境地址
+if (process.env.NODE_ENV === "test") {
+    LXF_baseUrl = SXG_baseUrl = 'http://39.104.135.186:8001/'
 }
+
+// 正式环境地址
+if (process.env.NODE_ENV === "production") {
+    LXF_baseUrl = SXG_baseUrl = 'http://www.sino-med.net:7001/'
+}
+
+export default{
+    LXF_baseUrl,
+    SXG_baseUrl
+}
+
+
