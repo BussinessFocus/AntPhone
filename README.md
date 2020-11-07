@@ -45,11 +45,10 @@ scripts ---- 存放npm执行webpack命令时对应的配置文件
     test.js ---- 测试程序时的配置文件
 src ---- 存放web应用程序的开发代码的文件夹，是开发者的最主要工作目录
     assets ---- web应用程序开发所需的静态资源，包含图片，字体文件等
-    common ---- 在当前项目中通用的js方法
-        request.js ---- 在当前项目中通用的数据请求方法，这个方法应是固有的，根据不同项目可进行相应修改
     components ---- 存放当前项目中的通用组件
     config ---- 存放web应用程序的配置
-        index.js ---- 配置文件
+        index.js ---- 在当前项目中通用的数据请求方法，这个方法应是固有的，根据不同项目可进行相应修改
+        url.js ---- 配置文件
     pages ---- web应用程序的页面
         page1.jsx ---- 页面demo1
         page2.jsx ---- 页面demo2
@@ -64,7 +63,7 @@ src ---- 存放web应用程序的开发代码的文件夹，是开发者的最�
         page2.css ---- 页面样式demo2
         page3.css ---- 页面样式demo3
     utils ---- 工具函数存放的位置
-    index.jsx ---- web应用程序的入口文件
+    index.js ---- web应用程序的入口文件
     serviceWorker.js ---- Service Worker功能使用文件
 .gitignore ---- git仓库的忽略文件
 AntPhoneIntroduction.md ---- 当前文档

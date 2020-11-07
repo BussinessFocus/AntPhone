@@ -1,14 +1,21 @@
-/*
- * @Author: 文件作者
- * @Date: 文件创建日期
- * @Description: 文件描述
- */
 
-import loadable from '../common/loadable'
-const page1 = loadable(() => import('../pages/page1.jsx'))
-
-const router = [
-    {path: "/page1", component: page1},
+const route = [
+    // {
+    //     path: "/HomeList",
+    //     models:() => [import("../model/myModel")],
+    //     component: () => import("../pages/HomeList")
+    // }, //首页列表
+    {
+        path: "/HomeList",
+        models: () => [import("../model/myModel")],
+        component: () => import('../pages/HomeList'),
+        children: [
+            {
+                path: "/HomeList/test",
+                component: () => import('../pages/Test'),
+            }
+        ]
+    }, //子路由    在父组件中的使用方法：{this.props.children}
 ]
 
-export default router
+export default route

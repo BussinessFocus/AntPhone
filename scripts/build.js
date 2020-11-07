@@ -16,16 +16,16 @@ require('../config/env');
 
 
 const path = require('path');
-const chalk = require('react-dev-common/chalk');
+const chalk = require('react-dev-utils/chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
 const configFactory = require('../config/webpack.config');
 const paths = require('../config/paths');
-const checkRequiredFiles = require('react-dev-common/checkRequiredFiles');
-const formatWebpackMessages = require('react-dev-common/formatWebpackMessages');
-const printHostingInstructions = require('react-dev-common/printHostingInstructions');
-const FileSizeReporter = require('react-dev-common/FileSizeReporter');
-const printBuildError = require('react-dev-common/printBuildError');
+const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
+const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
+const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
+const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
+const printBuildError = require('react-dev-utils/printBuildError');
 
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
@@ -48,7 +48,7 @@ const config = configFactory('production');
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
-const { checkBrowsers } = require('react-dev-common/browsersHelper');
+const { checkBrowsers } = require('react-dev-utils/browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.
@@ -94,7 +94,7 @@ checkBrowsers(paths.appPath, isInteractive)
       console.log();
 
       const appPackage = require(paths.appPackageJson);
-      const publicUrl = paths.publicUrl;
+      const publicUrl = paths.publicUrlOrPath;
       const publicPath = config.output.publicPath;
       const buildFolder = path.relative(process.cwd(), paths.appBuild);
       printHostingInstructions(
@@ -108,9 +108,11 @@ checkBrowsers(paths.appPath, isInteractive)
     err => {
       const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === 'true';
       if (tscCompileOnError) {
-        console.log(chalk.yellow(
-          'Compiled with the following type errors (you may want to check these before deploying your app):\n'
-        ));
+        console.log(
+          chalk.yellow(
+            'Compiled with the following type errors (you may want to check these before deploying your app):\n'
+          )
+        );
         printBuildError(err);
       } else {
         console.log(chalk.red('Failed to compile.\n'));
@@ -150,8 +152,18 @@ function build(previousFileSizes) {
         if (!err.message) {
           return reject(err);
         }
+
+        let errMessage = err.message;
+
+        // Add additional information for postcss errors
+        if (Object.prototype.hasOwnProperty.call(err, 'postcssNode')) {
+          errMessage +=
+            '\nCompileError: Begins at CSS selector ' +
+            err['postcssNode'].selector;
+        }
+
         messages = formatWebpackMessages({
-          errors: [err.message],
+          errors: [errMessage],
           warnings: [],
         });
       } else {
