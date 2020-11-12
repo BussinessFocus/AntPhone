@@ -73,4 +73,5 @@ yarn.lock ---- yarn安装包的依赖树锁定文件
 ```
 
 ### 使用的主要技术框架介绍
-react + antd-mobile
+必选：react + antd-mobile  
+可选：react-syntax-highlighter（高亮显示代码）
